@@ -1,0 +1,38 @@
+plugins {
+  id "no.nils.wsdl2java" version "0.6"
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = '1.7'
+mainClassName = 'de.schaeferban.lectures.Main'
+
+jar {
+  manifest {
+    attributes("Main-Class": mainClassName)
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+sourceSets {
+  main {
+    resources.srcDirs = []
+  }
+}
+
+dependencies {
+  testCompile 'junit:junit:4.12'
+}
+
+wsdl2java {
+  wsdlsToGenerate = [['src/main/resources/lectures.wsdl']]
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.4'
+}
